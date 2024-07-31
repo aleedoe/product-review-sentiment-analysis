@@ -58,12 +58,12 @@ def getApiReview(page):
     with open('tokopedia/detail-products.json', 'w') as f:
         json.dump(old_data, f, indent=4)
 
-    print("Data has been successfully added to the file detail-products.json")
 
 try:
     for index in range(206):
         index += 1
         getApiReview(index)
         print(index)
+        print(f"Data-{index} has been successfully added to the file detail-products.json")
 except:
     print('API review not found')
