@@ -38,7 +38,10 @@ def getApiReview(page):
 
     # Parse the response
     json_response = response.json()
-
+    json_response[0]['data']['productrevGetReviewImage'].pop('list', None)
+    json_response[0]['data']['productrevGetReviewImage']['detail'].pop('images', None)
+    json_response[0]['data']['productrevGetReviewImage']['detail'].pop('video', None)
+    
     # Try to open the existing data file
     try:
         with open('tokopedia/detail-products.json', 'r') as f:
@@ -63,7 +66,7 @@ try:
     for index in range(206):
         index += 1
         getApiReview(index)
-        print(index)
         print(f"Data-{index} has been successfully added to the file detail-products.json")
-except:
+except EnvironmentError as e:
     print('API review not found')
+    print(f"error message: {e}")
